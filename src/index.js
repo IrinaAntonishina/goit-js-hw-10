@@ -11,8 +11,8 @@ const refs = {
 
 // 1+получить все породы
 // 2+подставить их селект
-// 3-получить инфу по выбраной породе
-// 4-подставить в див 
+// 3+получить инфу по выбраной породе
+// 4+подставить в див 
 refs.select.addEventListener('change', selectBreeds)
 
 function selectBreeds(evt) {
@@ -22,18 +22,24 @@ getId(getBreedId);
 
 
 function getId(id){
+    refs.load.classList.remove('is-hidden')
+    // if(refs.load.classList.contains('is-hidden')){
+    //     refs.info.classList.add('is-hidden')
+    // }
     fetchCatByBreed(id).then(data => {
+        refs.load.classList.add('is-hidden')
+        
+        if(refs.info.classList.contains("active")){
+            refs.info.innerHTML = '';
+           }
 const img = data.map(createMarkUpImg).join('');
 refs.info.insertAdjacentHTML('afterbegin',img);
-const breedsInfo = data.map(elem => elem.breeds)
+const breedsInfo = data.map(elem => elem.breeds);
+const arr = breedsInfo[0];
+const dataCat = arr.map(createMarkUpAboutCat).join('');
+        refs.info.insertAdjacentHTML('beforeend',dataCat);
+refs.info.classList.add('active')
 
-// const dataCat = breedsInfo.flatMap(createMarkUpAboutCat).join('');
-        // refs.info.insertAdjacentHTML('afterbegin',breedsInfo);
-console.log(typeof(breedsInfo))
-
-        
-
-console.log(data)
 })
     .catch(err => {
         console.log(err)
@@ -41,7 +47,8 @@ console.log(data)
 }
 
 function getBreeds () {
-
+    refs.load.classList.add('is-hidden')
+    refs.error.classList.add('is-hidden')
     fetchBreeds().then(data => {
         const id = data.map(addMarkUpId).join('')
         refs.select.insertAdjacentHTML('afterbegin',id)
@@ -57,32 +64,16 @@ return `<option value="${id}">${name}</option>`
 }
 
 function createMarkUpImg({url}){
-return `<img src="${url}" alt="cat" width="640" class="cat-info_img">`
+return `<div class="container-img"> <img src="${url}" alt="cat" width="640" class="cat-info_img"></div>`
 }
 
 function createMarkUpAboutCat({description, name, temperament}){
-    return `<h2 class="cat-info_name">${name}</h2>
+    return `<div class="container-info"><h2 class="cat-info_name">${name}</h2>
     <p class="cat-info_text">${description}</p>
-    <p>Temperament:${temperament}</p>`
+    <p><span class="cat-info_span">Temperament:</span> ${temperament}</p></div>`
 }
 
 getBreeds()
 
 
-// function findCat(){
-//     fetchBreeds().then(data => {
-//         const id = data.map(addMarkUpId).join('')
-//         refs.select.insertAdjacentHTML('afterbegin',id)
-        
-//     }).catch(err => {
-//         console.log(err)
-//     })
-// }
-// ======================
-// const makeGalleryImagesMarkup = ({url, alt}) => {
-//     return `<li class="gallery_link"><img src=${url} alt=${alt} width = 300 class="gallery_img"></img></li>`;
-//     }
-    
-//     const galleryImg = images.map(makeGalleryImagesMarkup).join('')
-    
-//     galleryList.insertAdjacentHTML("afterbegin",galleryImg);
+

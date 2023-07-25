@@ -1,0 +1,15 @@
+img{
+    display: block;
+}
+.cat-info{
+    display: flex;
+    gap: 30px;
+}
+
+.cat-info_span{
+    font-weight: 700;
+}
+
+.is-hidden{
+    display: none;
+}
