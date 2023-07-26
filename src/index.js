@@ -45,9 +45,12 @@ refs.info.classList.add('active')
 }
 
 function getBreeds () {
-    refs.load.classList.add('is-hidden')
     refs.error.classList.add('is-hidden')
+    refs.select.classList.add('is-hidden')
+    
     fetchBreeds().then(data => {
+        refs.select.classList.remove('is-hidden')
+         refs.load.classList.add('is-hidden')
         const id = data.map(addMarkUpId).join('')
         refs.select.insertAdjacentHTML('afterbegin',id)
        
