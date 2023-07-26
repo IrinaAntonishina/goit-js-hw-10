@@ -7,6 +7,9 @@ export function fetchBreeds(){
     
     return fetch(`${BASE_URL}${END_POINT}?api_key=${KEY}`)
     .then(response => {
+        if (!response.ok) {
+            throw new Error(response.status);
+          }
         return response.json()
     })
 }
@@ -15,6 +18,9 @@ export function fetchBreeds(){
 export function fetchCatByBreed(breedId){
     return fetch(`${SEARCH_URL}?breed_ids=${breedId}&api_key=${KEY}`)
     .then(resp => {
+        if (!resp.ok) {
+            throw new Error(resp.status);
+          }
         return resp.json();
     })
 }

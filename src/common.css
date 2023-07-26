@@ -1,9 +1,16 @@
+p,
+h2{
+    margin: 0px;
+}
 img{
-    display: block;
+ display: block;
+ height: auto; 
+ 
 }
 .cat-info{
     display: flex;
     gap: 30px;
+    padding: 30px;
 }
 
 .cat-info_span{
@@ -12,4 +19,29 @@ img{
 
 .is-hidden{
     display: none;
+}
+
+.breed-select{
+    margin-left: 30px;
+    margin-top: 30px;
+    width: 300px;
+    height: 30px;
+}
+
+.loader{
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.error{
+    margin-top: 30px;
+    margin-left: 30px;
+    color: red;
+}
+
+.cat-info_name{
+    margin-bottom: 15px;
+}
+.cat-info_text{
+    margin-bottom: 15px;
 }
